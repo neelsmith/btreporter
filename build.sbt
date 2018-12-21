@@ -8,4 +8,5 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "net.liftweb" %% "lift-json" % "3.1.0",
   "com.github.nscala-time" %% "nscala-time" % "2.16.0"
+  //"org.dispatchhttp"        %% "dispatch-core"   % "1.0.0"
 )

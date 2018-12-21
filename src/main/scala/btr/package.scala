@@ -1,6 +1,8 @@
 package io.github.neelsmith
 
 package object btreporter {
+
+  
   // 1-origin index of months, as in date-time libs.
   // Will die a miserable death if index is not in 1..12
   def monthName(index: Int): String = {

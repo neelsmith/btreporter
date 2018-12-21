@@ -1,7 +1,7 @@
 package io.github.neelsmith.btreporter
 
 import org.scalatest.FlatSpec
-
+import net.liftweb.json._
 
 
 class BintrayPackageSpec extends FlatSpec {
@@ -28,12 +28,17 @@ val xciteJSON = """
   "rating_count":0
 }
 """
+  implicit val formats = DefaultFormats
+  val parsed = parse  (xciteJSON)
+  val extracted =   parsed.extract[BintrayPackage]
 
 
+  "A BintrayPackage" should "have a name property" in {
+    assert (extracted.versionName == "3.6.0")
+  }
 
-  "A BintrayPackage" should "have propertiers" in pending/*{
-    val yo = Yo("Scala coder")
-    assert(yo.greet == "Yo, Scala coder")
-  }*/
+  it should "have a nullable description property" in  {
+    assert(extracted.desc == null)
+  }
 
 }

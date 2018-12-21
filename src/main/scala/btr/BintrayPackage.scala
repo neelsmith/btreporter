@@ -4,18 +4,42 @@ import com.github.nscala_time.time._
 import org.joda.time._
 
 
-case class BintrayPackage(name: String, repo: String, desc: String, created: String, latest_version: String, updated: String, issue_tracker_url: String, versions: List[String]) {
+case class BintrayPackage(
+  name: String,
+  desc: String,
+  //package: String,
+  owner: String,
+  repo: String,
+  labels:  List[String],
+  //published: Boolean,
+  created: String,
+  updated: String,
+  //released: String,
+
+  versions: List[String]
+
+  //ordinal: BigDecimal,
+
+  //issue_tracker_url: String, versions: List[String]
+  ) {
 
   // create DateTime object from "updated" String
-  def dt = {
+  def updateDT = {
     Instant.parse(updated).toDateTime()
+  }
+  
+  def createdDT = {
+    Instant.parse(created).toDateTime()
   }
 
   def v = versions.toVector
-}
+  def latestVersion = versions.head
+  def versionName = name
 
-case class BintrayVersion(name: String, updated: String) {
-  def dt = {
-    Instant.parse(updated).toDateTime()
-  }
+  /*def description: Option[String] = {
+    desc masc {
+      case null => None
+      case _ => Some(desc)
+    }
+  }*/
 }
