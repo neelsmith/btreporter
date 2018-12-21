@@ -38,10 +38,10 @@ case class BintrayRepo(owner: String, repo: String) {
 
 
   /** Recursively build up a Vector of [[BintrayPackage]] options given a Vector of
-  * package names.
+  * package names and of previously accumluated package options.
   *
   * @param pkgNames Names of packages to report on.
-  * @param accumulated.
+  * @param accumulated Previously accumulated [[BintrayPackage]] options.
   */
   @tailrec final def btPackageVector(pkgNames: Vector[String], accumulated: Vector[Option[BintrayPackage]]): Vector[Option[BintrayPackage]] = {
     if (pkgNames.isEmpty) {
@@ -52,9 +52,23 @@ case class BintrayRepo(owner: String, repo: String) {
     }
   }
 
-
+  /** Recursively build up a Vector of [[BintrayPackage]] options given a Vector of
+  * package names.
+  *
+  * @param pkgs Vector of package names to report on.
+  */
   def bintrayPackages(pkgs: Vector[String]): Vector[Option[BintrayPackage]] =  {
     btPackageVector(pkgs, Vector.empty[Option[BintrayPackage]])
+  }
+
+
+  /** Pretty print JSON string for a given package's data.
+  *
+  * @param pkg Name of package to debug.
+  */
+  def debugJson(pkg: String): String = {
+    val pkgJson = Source.fromURL(packageBase + pkg).mkString
+    prettyRender(parse(pkgJson))
   }
 
 }

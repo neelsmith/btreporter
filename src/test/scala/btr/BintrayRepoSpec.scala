@@ -41,6 +41,10 @@ class BintrayRepoSpec extends FlatSpec {
   }
 
 
+  it should "support pretty-printing JSON for debugging" in {
+    val pkg = "xcite"
+    println("DEBUG:\n" + btRepo.debugJson(pkg) )
+  }
 
 
 }
