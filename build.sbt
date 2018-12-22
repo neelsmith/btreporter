@@ -1,6 +1,6 @@
 name := "btreporter"
 organization := "io.github.neelsmith"
-version := "2.3.0"
+version := "2.3.1"
 licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
 
 

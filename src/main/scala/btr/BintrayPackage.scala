@@ -70,7 +70,7 @@ case class BintrayPackage(
   /** Format key information as a row of a table in markdown.
   */
   def markdownRow: String = {
-    s"| `${name}` | **${latest_version}** | ${monthName(updateDT.getMonthOfYear)}, ${updateDT.getYear} | ${desc} | [${vcs_url}](${vcs_url}) | ${dlLink} |"
+    s"| `${name}` | **${latest_version}** | ${monthName(updateDT.getMonthOfYear)} ${updateDT.getDayOfMonth}, ${updateDT.getYear} | ${desc} | [${vcs_url}](${vcs_url}) | ${dlLink} |"
   }
 
 
