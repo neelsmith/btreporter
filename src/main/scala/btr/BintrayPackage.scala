@@ -27,11 +27,11 @@ case class BintrayPackage(
   created: String,
   //website_url: String,
   //rating: String,
-  //issue_tracker_url: String,
+  issue_tracker_url: String,
   linked_to_repos:  List[String],
   permissions:  List[String],
   versions: List[String],
-  //latest_version: String,
+  latest_version: String,
   rating_count:  Int,
   system_ids: List[String],
   updated: String //,
@@ -58,6 +58,14 @@ case class BintrayPackage(
   /** */
   def latestVersion = versions.head
   def versionName = name
+
+
+
+  def formatRow(btp: BintrayPackage): String = {
+    val github = btp.issue_tracker_url.replaceAll("/issues", "")
+
+    s"| ${btp.name} | **${btp.latest_version}** | ${monthName(btp.updateDT.getMonthOfYear)}, ${btp.updateDT.getYear} | ${btp.desc} | [${github}](${github}) |"
+  }
 
   /*def description: Option[String] = {
     desc masc {
