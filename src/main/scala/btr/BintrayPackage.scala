@@ -23,19 +23,20 @@ case class BintrayPackage(
   labels:  List[String],
   attribute_names : List[String],
   licenses: List[String],
-  //followers_count: String,
+  followers_count: Int,
   created: String,
-  //website_url: String,
+  website_url: String,
   //rating: String,
   issue_tracker_url: String,
   linked_to_repos:  List[String],
   permissions:  List[String],
   versions: List[String],
   latest_version: String,
+  updated: String,
   rating_count:  Int,
   system_ids: List[String],
-  updated: String //,
-  //vcs_url: String
+  vcs_url: String,
+  maturity: String
   //attributes:  Map[String, Any]
 
   ) {
@@ -60,17 +61,17 @@ case class BintrayPackage(
   def versionName = name
 
 
-
-  def formatRow(btp: BintrayPackage): String = {
-    val github = btp.issue_tracker_url.replaceAll("/issues", "")
-
-    s"| ${btp.name} | **${btp.latest_version}** | ${monthName(btp.updateDT.getMonthOfYear)}, ${btp.updateDT.getYear} | ${btp.desc} | [${github}](${github}) |"
+  /** Compose markdown string for download link. */
+  def dlLink: String = {
+    s"[ ![Download](https://api.bintray.com/packages/${owner}/${repo}/${name}/images/download.svg) ](https://bintray.com/${owner}/${repo}/${name}/_latestVersion)"
   }
 
-  /*def description: Option[String] = {
-    desc masc {
-      case null => None
-      case _ => Some(desc)
-    }
-  }*/
+
+  /** Format key information as a row of a table in markdown.
+  */
+  def markdownRow: String = {
+    s"| `${name}` | **${latest_version}** | ${monthName(updateDT.getMonthOfYear)}, ${updateDT.getYear} | ${desc} | [${vcs_url}](${vcs_url}) | ${dlLink} |"
+  }
+
+
 }

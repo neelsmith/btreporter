@@ -8,6 +8,7 @@ class BintrayPackageSpec extends FlatSpec {
 
 val xciteJSON = """
 {
+
   "name":"xcite",
   "repo":"maven",
   "owner":"neelsmith",
@@ -78,6 +79,7 @@ val xciteJSON = """
   ],
   "vcs_url":"https://github.com/cite-architecture/xcite.git",
   "maturity":"Development"
+
 }
 """
   implicit val formats = DefaultFormats
@@ -89,9 +91,20 @@ val xciteJSON = """
     assert (extracted.versionName == "xcite")
   }
 
-  it should "have a nullable description property" in {
+  it should "have a description property" in {
     val expected = "A cross-platform library for semantic manipulation of scholarly references expressed in URN notation."
     assert(extracted.desc == expected)
+  }
+
+  it should "compose markdown for download link using bintray icon" in {
+    val dlMd = extracted.dlLink
+    val expected = "[ ![Download](https://api.bintray.com/packages/neelsmith/maven/xcite/images/download.svg) ](https://bintray.com/neelsmith/maven/xcite/_latestVersion)"
+    assert (dlMd == expected)
+  }
+
+  it should "compose markdown for a table row with key info" in {
+    val md = extracted.markdownRow
+    val expected = "| `xcite` | **3.6.0**       | July, 2018 | A cross-platform library for semantic manipulation of scholarly references expressed in URN notation. | [https://github.com/cite-architecture/xcite.git](https://github.com/cite-architecture/xcite.git) | [ ![Download](https://api.bintray.com/packages/neelsmith/maven/xcite/images/download.svg) ](https://bintray.com/neelsmith/maven/xcite/_latestVersion) |".replaceAll("[ ]+", " ")
   }
 
 }
