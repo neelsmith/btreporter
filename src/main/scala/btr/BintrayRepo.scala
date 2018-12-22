@@ -69,18 +69,31 @@ case class BintrayRepo(owner: String, repo: String) {
     row1 + "| " + row2vals.mkString + " |\n"
   }
 
+
+  def mdForPackages(pkgs : Vector[BintrayPackage]): String = {
+    val rows = for (p <- pkgs) yield {
+      p.markdownRow
+    }
+    "\n" + markdownHeader + rows.mkString("\n") + "\n\n"
+  }
+
   def markdownTable (pkgNames: Vector[String]) : String = {
     val pkgs = bintrayPackages(pkgNames).flatten
     if (pkgs.size < 1) {
       "\n\nNo packages found for names " + pkgNames.mkString(", ")
     } else {
-      val rows = for (p <- pkgs) yield {
-        p.markdownRow
-      }
-      "\n" + markdownHeader + rows.mkString("\n") + "\n\n"
+      mdForPackages(pkgs)
     }
   }
 
+  def markdownTableByDate(pkgNames: Vector[String]) : String = {
+    val pkgs = packagesByDate(pkgNames)
+    if (pkgs.size < 1) {
+      "\n\nNo packages found for names " + pkgNames.mkString(", ")
+    } else {
+      mdForPackages(pkgs)
+    }
+  }
 
 
   /** Given a list of package names, order a Vector of [[BintrayPackage]]s by their last modified date, with most recent first.  Bad names are silently ignored.  To get a full Vector of `Option[BintrayPackage]`s, use the [[bintrayPackages]] function.

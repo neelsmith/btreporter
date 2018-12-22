@@ -1,6 +1,7 @@
 
 # `btreporter`: release notes
 
+**2.3.0**:  Further convenience functions for working with markdown tables.
 
 **2.2.0**:  Adds convenience function to sort package list by last modified date.
 
