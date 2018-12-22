@@ -79,9 +79,19 @@ case class BintrayRepo(owner: String, repo: String) {
       }
       "\n" + markdownHeader + rows.mkString("\n") + "\n\n"
     }
-
-
   }
+
+
+
+  /** Given a list of package names, order a Vector of [[BintrayPackage]]s by their last modified date, with most recent first.  Bad names are silently ignored.  To get a full Vector of `Option[BintrayPackage]`s, use the [[bintrayPackages]] function.
+  *
+  *  @param pkgNames Names of packages to collect.
+  */
+  def packagesByDate(pkgNames: Vector[String]): Vector[BintrayPackage] =  {
+    def pkgs = bintrayPackages(pkgNames).flatten
+    pkgs.sortWith( _.updateDT.getMillis > _.updateDT.getMillis)
+  }
+
 
 
   /** Pretty print JSON string for a given package's data.

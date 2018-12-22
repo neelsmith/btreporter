@@ -1,6 +1,6 @@
 name := "Bintray reporter"
 organization := "io.github.neelsmith"
-version := "2.0.0"
+version := "2.2.0"
 licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
 
 
