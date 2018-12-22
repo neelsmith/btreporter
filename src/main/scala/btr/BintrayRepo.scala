@@ -62,6 +62,28 @@ case class BintrayRepo(owner: String, repo: String) {
   }
 
 
+  def markdownHeader: String = {
+    val headerLabels = Vector("Package", "Current version", "Published", "Summary", "Github repository", "Binary download")
+    val row1 = "| " + headerLabels.mkString(" | ") + " |\n"
+    val row2vals = for (i <- 0 until headerLabels.size) yield { ":--------|"}
+    row1 + "| " + row2vals.mkString + " |\n"
+  }
+
+  def markdownTable (pkgNames: Vector[String]) : String = {
+    val pkgs = bintrayPackages(pkgNames).flatten
+    if (pkgs.size < 1) {
+      "\n\nNo packages found for names " + pkgNames.mkString(", ")
+    } else {
+      val rows = for (p <- pkgs) yield {
+        p.markdownRow
+      }
+      "\n" + markdownHeader + rows.mkString("\n") + "\n\n"
+    }
+
+
+  }
+
+
   /** Pretty print JSON string for a given package's data.
   *
   * @param pkg Name of package to debug.

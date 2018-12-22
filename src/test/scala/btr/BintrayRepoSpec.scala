@@ -40,11 +40,31 @@ class BintrayRepoSpec extends FlatSpec {
     }
   }
 
+  it should "compose a markdown table for a list of package names" in {
+    val pList = Vector("xcite", "nada")
+    val tab = btRepo.markdownTable(pList)
 
-  it should "support pretty-printing JSON for debugging" in {
+
+    //val expected = "\n| Package | Current version | Published | Summary | Github repository | Binary download |\n| :--------|:--------|:--------|:--------|:--------|:--------| \n| `xcite` | **3.6.0** | July, 2018 | A cross-platform library for semantic manipulation of scholarly references expressed in URN notation. | [https://github.com/cite-architecture/xcite.git](https://github.com/cite-architecture/xcite.git) | [ ![Download](https://api.bintray.com/packages/neelsmith/maven/xcite/images/download.svg) ](https://bintray.com/neelsmith/maven/xcite/_latestVersion) |"
+
+  val rows = tab.split("\n").toVector
+  val expectedRows = 4
+  assert(rows.size == expectedRows)
+
+  // drop blank header line:
+  val data = rows.tail
+  val expectedLabels = "| Package | Current version | Published | Summary | Github repository | Binary download |"
+  assert(data.head == expectedLabels)
+  val xciteData = data(2).split("\\|").toVector
+  val col1expected = " `xcite` "
+  assert(xciteData(1) == col1expected)
+
+  }
+
+  /*it should "support pretty-printing JSON for debugging" in {
     val pkg = "xcite"
     println("DEBUG:\n" + btRepo.debugJson(pkg) )
-  }
+  }*/
 
 
 }
