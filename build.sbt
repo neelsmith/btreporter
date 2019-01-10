@@ -9,3 +9,8 @@ libraryDependencies ++= Seq(
   "net.liftweb" %% "lift-json" % "3.1.0",
   "com.github.nscala-time" %% "nscala-time" % "2.16.0"
 )
+
+tutTargetDirectory := file("docs")
+tutSourceDirectory := file("tut")
+
+enablePlugins(TutPlugin)

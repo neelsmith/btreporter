@@ -13,6 +13,7 @@ case class BintrayRepo(owner: String, repo: String) {
   /** Base URL for packages */
   def packageBase = s"https://api.bintray.com/packages/${owner}/${repo}/"
 
+  val markdownTableHeader: String = s"| Package	| Current version |	Published	|  Summary |	Github repository |	Binary download |\n|:---------|:---------|:---------|:---------|:---------|:---------|\n"
 
   /** Create a [[BintrayPackage]] option for a named package.
   *  If the package name is invalid or the package JSON cannot be parsed,
