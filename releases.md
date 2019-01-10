@@ -1,6 +1,9 @@
 
 # `btreporter`: release notes
 
+
+**2.4.1**: Add function for markdown table header on `BtRepository`.
+
 **2.3.1**: Include day of month in date reporting in mardown.
 
 **2.3.0**:  Further convenience functions for working with markdown tables.

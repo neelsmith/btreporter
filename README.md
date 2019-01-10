@@ -4,7 +4,7 @@
 
 `btreporter` is a Scala lilbrary for reporting on contents of bintray repositories.
 
-## Current version: 2.3.1
+## Current version: 2.4.0
 
 Status: active development. [Release notes](releases.md).
 
@@ -15,4 +15,4 @@ Status: active development. [Release notes](releases.md).
 
 ## Scripting with `btreporter`
 
-See the `docs` folder
+See [the `docs` folder](https://github.com/neelsmith/btreporter/blob/master/docs/index.md) of this repo for a short guide.
