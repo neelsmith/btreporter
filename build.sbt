@@ -1,5 +1,5 @@
 name := "btreporter"
-name := "HMT CEX builder"
+
 
 crossScalaVersions  := Seq("2.11.8", "2.12.4")
 scalaVersion := (crossScalaVersions ).value.last
